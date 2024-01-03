@@ -231,23 +231,23 @@
                 {
                     "Address": 1010,
                     "ByteSize": 2,
+                    "Comment": "save width in B",
                     "DataType": 2
                 },
                 {
                     "Address": 1012,
                     "ByteSize": 2,
+                    "Comment": "draw sprite, DE=screen, HL=sprite, B=width, c=height",
                     "DataType": 2
                 },
                 {
                     "Address": 1014,
                     "ByteSize": 2,
-                    "Comment": "save width in B",
                     "DataType": 2
                 },
                 {
                     "Address": 1016,
                     "ByteSize": 2,
-                    "Comment": "draw sprite, DE=screen, HL=sprite, B=width, c=height",
                     "DataType": 2
                 },
                 {
@@ -258,7 +258,6 @@
                 {
                     "Address": 1020,
                     "ByteSize": 2,
-                    "Comment": "save on stack",
                     "DataType": 2
                 },
                 {
@@ -2755,6 +2754,10 @@
                     "Address": 210,
                     "ByteSize": 2,
                     "DataType": 2
+                },
+                {
+                    "Address": 217,
+                    "Comment": "high score in ascii, updated at game over"
                 }
             ],
             "LabelInfo": [
@@ -2817,6 +2820,12 @@
                     "Global": true,
                     "LabelType": 0,
                     "Name": "border_colour_store"
+                },
+                {
+                    "Address": 217,
+                    "Global": true,
+                    "LabelType": 0,
+                    "Name": "high_score_ascii"
                 },
                 {
                     "Address": 226,
@@ -2896,7 +2905,7 @@
                 },
                 {
                     "Address": 356,
-                    "Comment": "L contains char index, DE screen destination",
+                    "Comment": "print a single char from the ROM character set. L contains char index, DE screen destination",
                     "Global": true,
                     "LabelType": 1,
                     "Name": "print_rom_char"
@@ -5081,7 +5090,8 @@
                 },
                 {
                     "Address": 706,
-                    "ByteSize": 3
+                    "ByteSize": 3,
+                    "OperandType": 1
                 },
                 {
                     "Address": 709,
@@ -5968,23 +5978,26 @@
                 },
                 {
                     "Address": 695,
+                    "Comment": "routine to update the high score, which is stored as ascii. this does the BCD stuff",
+                    "Global": true,
                     "LabelType": 1,
-                    "Name": "function_62B7"
+                    "Name": "update_high_score"
                 },
                 {
                     "Address": 698,
                     "LabelType": 2,
-                    "Name": "label_62BA"
+                    "Name": "update_high_score_loop1"
                 },
                 {
                     "Address": 711,
+                    "Comment": "update_high_score_loop2",
                     "LabelType": 2,
-                    "Name": "label_62C7"
+                    "Name": "update_high_score_loop2"
                 },
                 {
                     "Address": 714,
                     "LabelType": 2,
-                    "Name": "label_62CA"
+                    "Name": "populate_high_score_digit"
                 },
                 {
                     "Address": 731,
@@ -6645,11 +6658,13 @@
                 },
                 {
                     "Address": 285,
-                    "ByteSize": 3
+                    "ByteSize": 3,
+                    "Comment": "print high score in lower right"
                 },
                 {
                     "Address": 288,
-                    "ByteSize": 3
+                    "ByteSize": 3,
+                    "OperandType": 1
                 },
                 {
                     "Address": 291,
@@ -9299,7 +9314,9 @@
                 },
                 {
                     "Address": 417,
-                    "ByteSize": 3
+                    "ByteSize": 3,
+                    "Comment": "print high score (6 chars wide) on lower right",
+                    "OperandType": 1
                 },
                 {
                     "Address": 420,
@@ -9333,6 +9350,125 @@
                 },
                 {
                     "Address": 431,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 432,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 433,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 434,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 435,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 436,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 437,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 438,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 439,
+                    "ByteSize": 2
+                },
+                {
+                    "Address": 441,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 442,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 443,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 444,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 445,
+                    "ByteSize": 3
+                },
+                {
+                    "Address": 448,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 449,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 450,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 451,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 452,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 453,
+                    "ByteSize": 2,
+                    "OperandType": 2
+                },
+                {
+                    "Address": 455,
+                    "ByteSize": 3,
+                    "OperandType": 1
+                },
+                {
+                    "Address": 458,
+                    "ByteSize": 3
+                },
+                {
+                    "Address": 461,
+                    "ByteSize": 3,
+                    "Comment": "this might be the extra life code",
+                    "Flags": 8,
+                    "OperandType": 2
+                },
+                {
+                    "Address": 464,
+                    "ByteSize": 1
+                },
+                {
+                    "Address": 465,
+                    "ByteSize": 2
+                },
+                {
+                    "Address": 467,
+                    "ByteSize": 3
+                },
+                {
+                    "Address": 470,
+                    "ByteSize": 2
+                },
+                {
+                    "Address": 472,
+                    "ByteSize": 3,
+                    "Flags": 8,
+                    "OperandType": 2
+                },
+                {
+                    "Address": 475,
                     "ByteSize": 1
                 },
                 {
@@ -9392,6 +9528,11 @@
                 },
                 {
                     "Address": 495,
+                    "ByteSize": 2,
+                    "OperandType": 2
+                },
+                {
+                    "Address": 497,
                     "ByteSize": 2,
                     "OperandType": 2
                 },
@@ -9538,6 +9679,13 @@
                     "OperandType": 2
                 }
             ],
+            "DataInfo": [
+                {
+                    "Address": 516,
+                    "ByteSize": 10,
+                    "DataType": 4
+                }
+            ],
             "LabelInfo": [
                 {
                     "Address": 26,
@@ -9630,6 +9778,11 @@
                     "Name": "label_699B"
                 },
                 {
+                    "Address": 450,
+                    "LabelType": 2,
+                    "Name": "label_69C2"
+                },
+                {
                     "Address": 476,
                     "LabelType": 1,
                     "Name": "function_69DC"
@@ -9652,7 +9805,7 @@
                 {
                     "Address": 509,
                     "LabelType": 2,
-                    "Name": "label_69FD"
+                    "Name": "print_game_over"
                 },
                 {
                     "Address": 532,
